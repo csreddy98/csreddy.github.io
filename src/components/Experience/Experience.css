@@ -1,0 +1,107 @@
+.experience-section {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.experience-section h2 {
+  font-size: 1.8em;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.experience-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: left;
+}
+
+.experience-card h3 {
+  font-size: 1.5em;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.experience-card h4 {
+  font-size: 1.2em;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.experience-card .duration {
+  font-size: 1em;
+  color: #999;
+  margin-bottom: 15px;
+}
+
+.experience-card ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.experience-card ul li {
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.timeline {
+  position: relative;
+  margin: 20px 0;
+  padding-left: 0px; /* Adjusted padding for better alignment */
+  border-left: 3px solid #333; /* Ensure the line is visible */
+}
+
+.timeline-item {
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -15px; /* Adjusted to prevent overlap with text */
+  top: 10px; /* Centered the dot vertically */
+  width: 16px;
+  height: 16px;
+  background-color: #333;
+  border-radius: 50%;
+  border: 2px solid #fff; /* Added contrast */
+}
+
+.timeline-item h3 {
+  font-size: 1.5em;
+  color: #555;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.timeline-item p {
+  font-size: 1em;
+  color: #777;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.timeline-item ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.timeline-item ul li {
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 5px;
+  text-align: left;
+}
