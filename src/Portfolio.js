@@ -14,7 +14,7 @@ const Portfolio = () => {
       <Summary />
       <Expertise />
       <Experience />
-      <Projects />
+      {/* <Projects /> */}
       <Footer />
     </div>
   );

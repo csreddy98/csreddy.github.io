@@ -1,43 +1,43 @@
 .portfolio-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
   background-color: #282c34;
   color: white;
-  padding: 20px;
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
 }
 
-.profile-image {
+.portfolio-header img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
+  margin-bottom: 15px;
 }
 
 .header-text {
-    width: 80%;
-    text-align: left;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .header-text h1 {
   margin: 0;
   font-size: 1.5em;
-  text-align: left;
+  margin-bottom: 10px;
 }
 
 .header-text p {
-  margin: 5px 0 0;
+  margin: 5px 0 20px;
   font-size: 1em;
   color: #ccc;
-  text-align: left;
 }
 
 .header-links {
-  margin-top: 10px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
   width: 100%;
-  justify-content: space-between;
-  color: white;
+  justify-items: center;
 }
 
 .header-links a {
@@ -57,6 +57,36 @@
   font-size: 1.2em;
 }
 
-.portfolio-header h1 {
-  text-align: left;
+@media (min-width: 768px) {
+  .portfolio-header {
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
+  }
+
+  .portfolio-header img {
+    margin-bottom: 0;
+  }
+
+  .header-text {
+    text-align: left;
+    margin-bottom: 0;
+    margin-left: 20px;
+  }
+
+  .header-links {
+    grid-template-columns: auto auto auto auto;
+    justify-items: start;
+    gap: 15px;
+  }
+
+  .header-text h1 {
+    font-size: 2em;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-text {
+    text-align: center !important;
+  }
 }

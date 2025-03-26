@@ -28,7 +28,7 @@ const Expertise = () => {
       category: 'AI/ML',
       items: [
         'Built machine learning models using TensorFlow and PyTorch.',
-        'Analyzed data with Pandas and Scikit-learn.'
+        'Developed data pipelines for preprocessing and feature engineering.'
       ]
     },
     {
