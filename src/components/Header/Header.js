@@ -16,6 +16,10 @@ const Header = () => {
           <a href="https://linkedin.com/in/csreddy98" target="_blank" rel="noopener noreferrer">
             <FaLinkedin /> LinkedIn
           </a>
+          <a href="https://www.huggingface.co/csr" target="_blank" rel="noopener noreferrer" className="hugging-face-link">
+            <img src="https://huggingface.co/front/assets/huggingface_logo.svg" alt="Hugging Face" className="hugging-face-logo" />
+            Hugging Face
+          </a>
           <a href="https://medium.com/@csreddy1998" target="_blank" rel="noopener noreferrer">
             <FaMedium /> Medium
           </a>
