@@ -4,24 +4,19 @@ import './Experience.css';
 const Experience = () => {
   const experiences = [
     {
-      role: 'Software Engineer',
-      company: 'Citizens',
+      role: 'Senior Full-stack Engineer',
+      company: 'Citizens Bank',
       duration: 'Sep 2023 - Present',
     },
     {
-      role: 'Lead Software Engineer',
+      role: 'Full-Stack Engineer',
       company: 'Lbits Technologies',
       duration: 'Oct 2020 - Dec 2021',
     },
     {
-      role: 'Associate Software Engineer',
-      company: 'Lbits Technologies',
-      duration: 'Jul 2019 - Oct 2020',
-    },
-    {
-      role: 'Software Developer',
+      role: 'Backend Developer',
       company: 'Open Box Digital and Emerging Technologies',
-      duration: 'Apr 2018 - Jul 2019',
+      duration: 'Jan 2019 - Jul 2019',
     }
   ];
 
