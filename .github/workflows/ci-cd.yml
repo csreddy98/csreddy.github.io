@@ -32,15 +32,63 @@ jobs:
     - name: Build project
       run: npm run build
 
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-files
+        path: build/
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Download build artifacts
+      uses: actions/download-artifact@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build
+        name: build-files
+        path: build/
+
+    - name: Deploy to server via SSH
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        password: ${{ secrets.SERVER_PASSWORD }}
+        port: ${{ secrets.SERVER_PORT || 22 }}
+        script: |
+          # Create backup of current files
+          sudo mkdir -p /var/www/html-backup
+          sudo cp -r /var/www/html/* /var/www/html-backup/ 2>/dev/null || true
+          
+          # Clear the web directory
+          sudo rm -rf /var/www/html/*
+
+    - name: Copy files to server
+      uses: appleboy/scp-action@v0.1.4
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        password: ${{ secrets.SERVER_PASSWORD }}
+        port: ${{ secrets.SERVER_PORT || 22 }}
+        source: "build/*"
+        target: "/tmp/react-build"
+        strip_components: 1
+
+    - name: Move files to web directory
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        password: ${{ secrets.SERVER_PASSWORD }}
+        port: ${{ secrets.SERVER_PORT || 22 }}
+        script: |
+          # Move files from temp to web directory
+          sudo mv /tmp/react-build/* /var/www/html/
+          
+          # Set proper permissions
+          sudo chown -R www-data:www-data /var/www/html/
+          sudo chmod -R 755 /var/www/html/
+          
+          # Clean up temp directory
+          rm -rf /tmp/react-build
