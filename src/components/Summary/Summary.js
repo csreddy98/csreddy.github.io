@@ -6,7 +6,7 @@ const Summary = () => {
     <section className="summary-section">
       <h2>About Me</h2>
       <p>
-        Software Engineer with 5+ years of experience in building scalable, high-performance systems using ReactJS &
+        Software Engineer with 4+ years of experience in building scalable, high-performance systems using ReactJS &
         Python. Proficient in cloud platforms like AWS and Azure, microservices architecture, and automating
         workflows with CI/CD pipelines. Proven track record of optimizing processes to drive cost savings, enhance
         user experience. Skilled in collaborating with cross-functional teams in agile environments to deliver innovative

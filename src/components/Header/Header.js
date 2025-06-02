@@ -5,7 +5,7 @@ import './Header.css';
 const Header = () => {
   return (
     <header className="portfolio-header">
-      <img src="https://media.licdn.com/dms/image/v2/D5603AQFmcwYDcnpwrg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1720990471369?e=1748476800&v=beta&t=hYic-8JFxZ4AKHT4-n-SV8DqvWcDwfVdgF5MvxjHWnE" alt="Developer" className="profile-image" />
+      <img src="https://media.licdn.com/dms/image/v2/D5603AQFmcwYDcnpwrg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1720990471369?e=1754524800&v=beta&t=P2Z8bL_cDMi1B6LznnPIvrtOMoDxkDiz2pVkX55O7f0" alt="Developer" className="profile-image" />
       <div className="header-text">
         <h1>Chandra Dondeti</h1>
         <p>Senior Full Stack Developer | Gen AI Specialist</p>
