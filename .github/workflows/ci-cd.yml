@@ -58,10 +58,10 @@ jobs:
         port: ${{ secrets.SSH_PORT || 22 }}
         script: |
           # Create backup of current files
-          sudo mkdir -p /var/www/html-backup
-          sudo cp -r /var/www/html/* /var/www/html-backup/ 2>/dev/null || true
+          mkdir -p ~/html-backup
+          cp -r /var/www/html/* ~/html-backup/ 2>/dev/null || true
           
-          # Clear the web directory
+          # Clear the web directory (assuming user has sudo privileges)
           sudo rm -rf /var/www/html/*
 
     - name: Copy files to server
@@ -84,7 +84,7 @@ jobs:
         port: ${{ secrets.SSH_PORT || 22 }}
         script: |
           # Move files from temp to web directory
-          sudo mv /tmp/react-build/* /var/www/html/
+          sudo cp -r /tmp/react-build/* /var/www/html/
           
           # Set proper permissions
           sudo chown -R www-data:www-data /var/www/html/
