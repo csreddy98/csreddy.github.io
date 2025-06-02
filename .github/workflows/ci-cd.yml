@@ -49,46 +49,30 @@ jobs:
         name: build-files
         path: build/
 
-    - name: Deploy to server via SSH
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        password: ${{ secrets.SSH_PASSWORD }}
-        port: ${{ secrets.SSH_PORT || 22 }}
-        script: |
-          # Create backup of current files
-          mkdir -p ~/html-backup
-          cp -r /var/www/html/* ~/html-backup/ 2>/dev/null || true
-          
-          # Clear the web directory (assuming user has sudo privileges)
+    - name: Install sshpass
+      run: sudo apt-get update && sudo apt-get install -y sshpass
+
+    - name: Deploy files to server
+      env:
+        SSH_HOST: ${{ secrets.SSH_HOST }}
+        SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+        SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+        SSH_PORT: ${{ secrets.SSH_PORT || 22 }}
+      run: |
+        # Create backup and clear directory
+        sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USERNAME@$SSH_HOST "
+          mkdir -p ~/html-backup && 
+          sudo cp -r /var/www/html/* ~/html-backup/ 2>/dev/null || true &&
           sudo rm -rf /var/www/html/*
-
-    - name: Copy files to server
-      uses: appleboy/scp-action@v0.1.7
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        password: ${{ secrets.SSH_PASSWORD }}
-        port: ${{ secrets.SSH_PORT || 22 }}
-        source: "build/*"
-        target: "/tmp/react-build"
-        strip_components: 1
-
-    - name: Move files to web directory
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        password: ${{ secrets.SSH_PASSWORD }}
-        port: ${{ secrets.SSH_PORT || 22 }}
-        script: |
-          # Move files from temp to web directory
-          sudo cp -r /tmp/react-build/* /var/www/html/
-          
-          # Set proper permissions
-          sudo chown -R www-data:www-data /var/www/html/
-          sudo chmod -R 755 /var/www/html/
-          
-          # Clean up temp directory
+        "
+        
+        # Upload files using rsync
+        sshpass -p "$SSH_PASSWORD" rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no -p $SSH_PORT" build/ $SSH_USERNAME@$SSH_HOST:/tmp/react-build/
+        
+        # Move files and set permissions
+        sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USERNAME@$SSH_HOST "
+          sudo cp -r /tmp/react-build/* /var/www/html/ &&
+          sudo chown -R www-data:www-data /var/www/html/ &&
+          sudo chmod -R 755 /var/www/html/ &&
           rm -rf /tmp/react-build
+        "
