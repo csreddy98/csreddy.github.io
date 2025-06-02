@@ -16,7 +16,7 @@ const Projects = () => {
     {
       name: 'Financial Advisor',
       link: 'https://github.com/csreddy98/financial-advisor',
-      description: '<b>Financial-Advisor</b> is a fine-tuned language model powered by Gemma-2-2b, designed to provide accurate and timely answers to financial questions. Optimized with the Gemma Financial Advisor Dataset, it delivers high-confidence insights tailored for financial decision-making. Optimized with the <a target="_blank" href="https://huggingface.co/csr/gemma-finanical-advisor">Gemma Financial Advisor Dataset</a>',
+      description: '<b>Financial-Advisor</b> is a fine-tuned language model powered by Gemma-2-2b, designed to provide accurate and timely answers to financial questions. Optimized with the Gemma Financial Advisor Dataset, it delivers high-confidence insights tailored for financial decision-making. Optimized with the <a target="_blank" rel="noreferrer" href="https://huggingface.co/csr/gemma-finanical-advisor">Gemma Financial Advisor Dataset</a>',
     }
   ];
 
@@ -25,7 +25,7 @@ const Projects = () => {
       <h2>Projects</h2>
       {projectList.map((project, index) => (
         <div className="project" key={index}>
-          <h3><a href={project.link} target="_blank">{project.name}</a></h3>
+          <h3><a href={project.link} target="_blank" rel="noreferrer">{project.name}</a></h3>
           <p dangerouslySetInnerHTML={{ __html: project.description }} />
         </div>
       ))}
