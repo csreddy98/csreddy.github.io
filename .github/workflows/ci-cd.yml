@@ -52,10 +52,10 @@ jobs:
     - name: Deploy to server via SSH
       uses: appleboy/ssh-action@v1.0.3
       with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USERNAME }}
-        password: ${{ secrets.SERVER_PASSWORD }}
-        port: ${{ secrets.SERVER_PORT || 22 }}
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: ${{ secrets.SSH_PORT || 22 }}
         script: |
           # Create backup of current files
           sudo mkdir -p /var/www/html-backup
@@ -67,10 +67,10 @@ jobs:
     - name: Copy files to server
       uses: appleboy/scp-action@v0.1.7
       with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USERNAME }}
-        password: ${{ secrets.SERVER_PASSWORD }}
-        port: ${{ secrets.SERVER_PORT || 22 }}
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: ${{ secrets.SSH_PORT || 22 }}
         source: "build/*"
         target: "/tmp/react-build"
         strip_components: 1
@@ -78,10 +78,10 @@ jobs:
     - name: Move files to web directory
       uses: appleboy/ssh-action@v1.0.3
       with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USERNAME }}
-        password: ${{ secrets.SERVER_PASSWORD }}
-        port: ${{ secrets.SERVER_PORT || 22 }}
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: ${{ secrets.SSH_PORT || 22 }}
         script: |
           # Move files from temp to web directory
           sudo mv /tmp/react-build/* /var/www/html/
